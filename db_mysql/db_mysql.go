@@ -1,6 +1,7 @@
 package db_mysql
 
 import (
+	"Datarenzheng1010/models"
 	"database/sql"
 	"github.com/astaxie/beego"
 	"fmt"
@@ -38,4 +39,20 @@ func Connect() {
 	//代码封装:可以将重复的代码或者功能相对比较独立的代码，进行封装，以
 	//函数的形式进行封装，变成一个代码块或者是功能包，供使用者进行调用
 
+}
+
+func SaveMovies2Db(db models.User)(int64,error){
+	result,err:=Db.Exec("insert into userdata(phone,pwd) values(?,?)",
+		db.Phone,db.Pwd)
+	if err != nil {
+		fmt.Println(err.Error())
+		return 0,err
+	}
+
+	rowId,err:=result.RowsAffected()
+	if err != nil {
+		fmt.Println(err.Error())
+		return 0,err
+	}
+	return rowId,err
 }

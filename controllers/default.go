@@ -9,5 +9,5 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
-	c.TplName = "电子数据认证平台.html"
+	c.TplName = "reg.html"
 }

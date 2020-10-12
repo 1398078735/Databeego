@@ -2,8 +2,8 @@ package main
 
 import (
 	"Datarenzheng1010/db_mysql"
+	_ "Datarenzheng1010/routers"
 	"github.com/astaxie/beego"
-	_"github.com/go-sql-driver/mysql"
 )
 
 func main(){
@@ -11,7 +11,6 @@ func main(){
 	//静态资源文件路径
 	beego.SetStaticPath("/js","./static/js")
 	beego.SetStaticPath("/css","./static/css")
-	beego.SetStaticPath("/img","./static/img")
 
 	beego.Run()
 }
