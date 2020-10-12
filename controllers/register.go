@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"Datarenzheng1010/db_mysql"
 	"Datarenzheng1010/models"
+	"fmt"
 	"github.com/astaxie/beego"
 )
 
@@ -23,5 +25,19 @@ func (r *RegisterController) Get() {
 		r.Ctx.WriteString("抱歉，数据错误")
 		return
 	}
-	r.TplName = "login.html"
+	//r.TplName = "login.html"
+
+	row, err :=db_mysql.AddUser(user)
+	if err != nil {
+		r.Ctx.WriteString("注册用户信息失败，请重试")
+		return
+	}
+	fmt.Println(row)
+	//row代表影响了几行
+
+	if row != -1 {
+		r.TplName = "login.html"
+	}else {
+		r.TplName = "error.html"
+	}
 }

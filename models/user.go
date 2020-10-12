@@ -1,6 +1,6 @@
 package models
 
 type User struct {
-	Pwd string
-	Phone int
+	Phone string `form:"phone"`
+	Pwd string `form:"password"`
 }

@@ -2,10 +2,12 @@ package db_mysql
 
 import (
 	"Datarenzheng1010/models"
+	"crypto/md5"
 	"database/sql"
-	"github.com/astaxie/beego"
+	"encoding/hex"
 	"fmt"
-	_"github.com/go-sql-driver/mysql"
+	"github.com/astaxie/beego"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var Db *sql.DB
@@ -41,18 +43,23 @@ func Connect() {
 
 }
 
-func SaveMovies2Db(db models.User)(int64,error){
-	result,err:=Db.Exec("insert into userdata(phone,pwd) values(?,?)",
-		db.Phone,db.Pwd)
+func AddUser(u models.User)(int64, error){
+	//1、将密码进行hash计算，得到密码hash值，然后在存
+	md5Hash := md5.New()
+	md5Hash.Write([]byte(u.Pwd))
+	psswordBytes := md5Hash.Sum(nil)
+	u.Pwd = hex.EncodeToString(psswordBytes)
+	//execute， .exe可执行文件
+	result, err :=Db.Exec("insert into userdata(phone,pwd)" +
+		" values(?,?) ", u.Phone,u.Pwd)
 	if err != nil {
-		fmt.Println(err.Error())
-		return 0,err
+		return -1,err
 	}
+	row,err := result.RowsAffected()//用于返回影响数据中几行数据.比如保存了一条数据则
+	//返回1
+	if err != nil {
+		return -1,err
+	}
+	return row,nil
 
-	rowId,err:=result.RowsAffected()
-	if err != nil {
-		fmt.Println(err.Error())
-		return 0,err
-	}
-	return rowId,err
 }
