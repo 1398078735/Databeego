@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"Datarenzheng1010/db_mysql"
 	"Datarenzheng1010/models"
 	"fmt"
 	"github.com/astaxie/beego"
@@ -13,6 +12,7 @@ type RegisterController struct {
 
 
 //该方法用于处理用户登录
+
 func (r *RegisterController) Get() {
 	//解析用户端请求数据
 
@@ -27,17 +27,12 @@ func (r *RegisterController) Get() {
 	}
 	//r.TplName = "login.html"
 
-	row, err :=db_mysql.AddUser(user)
+	_, err = user.AddUser()
 	if err != nil {
+		fmt.Println(err.Error())
 		r.Ctx.WriteString("注册用户信息失败，请重试")
 		return
 	}
-	fmt.Println(row)
-	//row代表影响了几行
+	r.TplName = "login.html"
 
-	if row != -1 {
-		r.TplName = "login.html"
-	}else {
-		r.TplName = "error.html"
-	}
 }
