@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60a505e7-d17c-4cc5-995d-a2147149ac1e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/uploadRecord.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/upload/DNF_icon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/upload/oss_59fa93ffc27b0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uploadDNF_icon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uploadoss_59fa93ffc27b0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/uploadRecord.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/home.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/home.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/qrcode.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/qrcode.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/uploadDNF_icon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/upload/uploadDNF_icon.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/uploadoss_59fa93ffc27b0.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/upload/uploadoss_59fa93ffc27b0.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -53,16 +48,17 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/static/img" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GoProjects\src\Datarenzheng1010\static\upload" />
+      <recent name="E:\GoProjects\src\Datarenzheng1010\static\img" />
+      <recent name="E:\GoProjects\src\Datarenzheng1010\views" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\GoProjects\src\Datarenzheng1010\static\img" />
       <recent name="E:\GoProjects\src\Datarenzheng1010\static\js" />
       <recent name="E:\GoProjects\src\Datarenzheng1010\views" />
       <recent name="E:\GoProjects\src\Datarenzheng1010\conf" />
       <recent name="E:\GoProjects\src\Datarenzheng1010\static\css" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\GoProjects\src\Datarenzheng1010\static\img" />
-      <recent name="E:\GoProjects\src\Datarenzheng1010\views" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build Datarenzheng1010">
