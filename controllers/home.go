@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"Datarenzheng1010/models"
+	"crypto/md5"
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
@@ -9,6 +11,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+	"time"
 )
 
 type HomeController struct {
@@ -19,6 +22,8 @@ type HomeController struct {
 //post用io包保存文件
 //post1用beego框架的方式保存文件
 func (h *HomeController) Post(){
+	phone :=h.Ctx.Request.PostFormValue("phone")
+
 	//该post的方法用于处理用户在客户端的文件
 	title := h.Ctx.Request.PostFormValue("upload_title")//获取用户输入信息
 	fmt.Println(title)
@@ -73,15 +78,41 @@ func (h *HomeController) Post(){
 	hash256.Write(fileBytes)
 	hashBytes := hash256.Sum(nil)
 	fmt.Println(hex.EncodeToString(hashBytes))
-	//先查询用户id
 
+	//先查询用户id
+	user1,err := models.User{Phone:phone}.QueryUserByphone()
+	if err != nil {
+		h.Ctx.WriteString("抱歉，查询用户失败")
+	}
 
 
 	//把上传的文件作为记录保存到数据库当中
+	md5Has:=md5.New()
+	mdhfileBytes,err:=ioutil.ReadAll(saveFile)
+	md5Has.Write(mdhfileBytes)
+	bytes := md5Has.Sum(nil)
+	record := models.UploadRecord{
+		UserId:    user1.Id,
+		FileName:  header.Filename,
+		FileSize:  header.Size,
+		FileCert:  hex.EncodeToString(bytes),
+		FileTitle: title,
+		CertTime:  time.Now().Unix(),
+	}
+	_ , err = record.SavaRecord()
+	if err != nil {
+		h.Ctx.WriteString("抱歉数据保存失败")
+		return
+	}
+	//上传文件保存到数据库中
+	records,err:=models.QueryUserRecord(user1.Id)
+	if err != nil {
+		h.Ctx.WriteString("抱歉获取数据失败")
+		return
+	}
 
-
-
-	h.Ctx.WriteString("运行成功")
+	h.Data["Records"] = records
+	h.TplName = "uploadRecord.html"
 
 }
 

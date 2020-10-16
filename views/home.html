@@ -265,7 +265,9 @@
                                                                                                    multiple=""
                                                                                                    id="uploadOne"></div>
                                                     </div>
-                                                    <button class="blueButton" type="submit">立即存证</button>
+                                                    <!--用户的phone信息-->
+                                                    <input type="text" value="{{.Phone}}" hidden="hidden" name="phone">
+                                                    <input class="blueButton" type="submit" value="立即存证">
                                                 </div>
                                                 <div class="files-tip"><h3 class="title">温馨提示</h3>
                                                     <p>1、信息安全，人人有责，严禁上传违法、反动、危害社会公共安全等不良信息；</p>

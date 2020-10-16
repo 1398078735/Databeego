@@ -16,4 +16,6 @@ func init() {
 	//用户上传文件接口
     beego.Router("/home",&controllers.HomeController{})
     beego.Router("/home.html",&controllers.HomeController{})
+
+    beego.Router("/uploadRecord.html",&controllers.HomeController{})
 }

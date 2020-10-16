@@ -8,6 +8,7 @@ import (
 )
 
 type User struct {
+	Id int `form:"id"`
 	Phone string `form:"phone"`
 	Pwd string `form:"pwd"`
 }
@@ -44,6 +45,17 @@ func (u User) QueryUser()(*User,error){
 
 	row:=db_mysql.Db.QueryRow("select phone from userdata where phone = ? and pwd = ?",
 		u.Phone,u.Pwd)
+
+	err := row.Scan(&u.Phone)
+	if err != nil {
+		return nil,err
+	}
+	return &u,err
+}
+
+func (u User) QueryUserByphone()(*User,error){
+	row:=db_mysql.Db.QueryRow("select id from userdata where phone = ? ",
+		u.Phone)
 
 	err := row.Scan(&u.Phone)
 	if err != nil {
