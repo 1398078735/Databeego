@@ -13,7 +13,7 @@ type UploadRecord struct {
 	FileSize  int64
 	FileCert  string
 	FileTitle string
-	CertTime  int64
+	CertTime  string
 }
 
 //把一条认证数据保存到数据库表中

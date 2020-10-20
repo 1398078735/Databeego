@@ -21,7 +21,6 @@ func (h *HomeController) Post() {
 
 	//该post的方法用于处理用户在客户端的文件
 	title := h.Ctx.Request.PostFormValue("upload_title") //获取用户输入信息
-	fmt.Println(title)
 	//用户上传的文件
 	file, header, err := h.GetFile("tengyuanqianhua")
 	if err != nil { //解析客户端提交的文件出现错误
@@ -85,14 +84,15 @@ func (h *HomeController) Post() {
 	}
 
 	//把上传的文件作为记录保存到数据库当中
-	md5String := tools.Md5HashReader(file)
+	saveFile,err := os.Open(savaFilePath)
+	md5String := tools.Md5HashReader(saveFile)
 	record := models.UploadRecord{
 		UserId:    user1.Id,
 		FileName:  header.Filename,
-		FileSize:  header.Size,
+		FileSize:  header.Size/1024,
 		FileCert:  md5String,
 		FileTitle: title,
-		CertTime:  time.Now().Unix(),
+		CertTime:  time.Now().Format("2006-01-02 15:04:05"),
 	}
 	_, err = record.SavaRecord()
 	if err != nil {
