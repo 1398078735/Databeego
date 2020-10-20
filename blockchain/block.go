@@ -1,6 +1,8 @@
 package blockchain
 
 import (
+	"Datarenzheng1010/tools"
+	"bytes"
 	"time"
 )
 
@@ -23,23 +25,28 @@ func NewBlock(height int64, preHash []byte, data []byte) Block{
 		Data:      data,
 		Version:   "1.0",
 	}
-	//block.Hash =
+
+	//将block结构体数据转换成[]byte类型
+	HeightBytes,_ := tools.Int64ToByte(block.Height)
+	timeStampBytes,_ := tools.Int64ToByte(block.TimeStamp)
+	versionBytes:= tools.StringToBytes(block.Version)
+	var blockBytes []byte
+	//bytes.join拼接
+	bytes.Join([][]byte{
+		HeightBytes,
+		timeStampBytes,
+		block.PrevHash,
+		block.Data,
+		versionBytes,
+	},[]byte{})
+	//调用hash计算,对区块进行sha256计算
+	block.Hash = tools.SHA256HashBlock(blockBytes)
 	return block
 }
+
 
 //创建创世区块
 func CreateGenesis() Block{
 	genesisBlock := NewBlock(0,[]byte{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},nil)
 	return genesisBlock
 }
-
-func CalculateHash(block Block) string {
-	//height := tools.Int64ToBytes(block.Height)
-	//timestamp := tools.Int64ToBytes(block.TimeStamp)
-	//record :=  height + timestamp + block.Data + block.PrevHash
-	//h := sha256.New()
-	//h.Write([]byte(record))
-	//hashed := h.Sum(nil)
-	//return hex.EncodeToString(hashed)
-}
-
