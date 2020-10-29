@@ -39,14 +39,14 @@ func QueryUserRecord(userId int) ([]UploadRecord, error) {
 		return nil, err
 	}
 	//从rs中读取查询到的数据,返回
-	records := make([]UploadRecord, 0) //容器
+	Records := make([]UploadRecord, 0) //容器
 	for rs.Next() {
 		var record UploadRecord
 		err := rs.Scan(&record.Id,&record.UserId, &record.FileName, &record.FileSize, &record.FileCert, &record.FileTitle, &record.CertTime)
 		if err != nil {
 			return nil, err
 		}
-		records = append(records, record)
+		Records = append(Records, record)
 	}
-	return records, nil
+	return Records, nil
 }

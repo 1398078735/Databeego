@@ -18,4 +18,6 @@ func init() {
     beego.Router("/home.html",&controllers.HomeController{})
 
     beego.Router("/uploadRecord.html",&controllers.HomeController{})
+
+	beego.Router("/querydata.html",&controllers.HomeController{})
 }

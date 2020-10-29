@@ -3,7 +3,6 @@ package blockchain
 import (
 	"Datarenzheng1010/tools"
 	"bytes"
-	"fmt"
 	"math/big"
 )
 
@@ -52,7 +51,7 @@ func (p ProofOfWork) Run() ([]byte,int64){
 		var hashBig *big.Int
 		hashBig = new(big.Int) //分配内存空间,为变量分配地址
 		hashBig = hashBig.SetBytes(blockHash)
-		fmt.Println("当前的nonce值是:",nonce)
+		//fmt.Println("当前的nonce值是:",nonce)
 
 		target := p.Target //目标值
 		if hashBig.Cmp(target) == -1 {

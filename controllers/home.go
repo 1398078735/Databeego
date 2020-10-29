@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"Datarenzheng1010/blockchain"
 	"Datarenzheng1010/models"
 	"Datarenzheng1010/tools"
 	"fmt"
@@ -14,6 +15,9 @@ type HomeController struct {
 	beego.Controller
 }
 
+func(h *HomeController) Get(){
+	h.TplName = "querydata.html"
+}
 //post用io包保存文件
 //post1用beego框架的方式保存文件
 func (h *HomeController) Post() {
@@ -100,6 +104,16 @@ func (h *HomeController) Post() {
 		h.Ctx.WriteString("抱歉数据保存失败")
 		return
 	}
+
+	//将用户上传的文件的md5和sha256值保存到区块链上，即数据上链
+	blockchain.CHAIN.SaveData([]byte(md5String))
+
+	blocks,_:=blockchain.CHAIN.QueryAllBlocks()
+	for _, block := range blocks{
+		fmt.Printf("区块高度:%d,区块内数据:%s\n",block.Height,string(block.Data))
+	}
+
+
 	//上传文件保存到数据库中
 	records, err := models.QueryUserRecord(user1.Id)
 	if err != nil {
