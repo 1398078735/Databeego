@@ -8,6 +8,7 @@ import (
 )
 
 var Db *sql.DB
+
 func Connect() {
 	fmt.Println("链接mysql数据库")
 	config := beego.AppConfig //定义config变量,接收并赋值为全局配置变量
@@ -37,6 +38,5 @@ func Connect() {
 	Db = db
 	//代码封装:可以将重复的代码或者功能相对比较独立的代码，进行封装，以
 	//函数的形式进行封装，变成一个代码块或者是功能包，供使用者进行调用
-
 }
 

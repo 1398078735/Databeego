@@ -15,9 +15,6 @@ type HomeController struct {
 	beego.Controller
 }
 
-func(h *HomeController) Get(){
-	h.TplName = "querydata.html"
-}
 //post用io包保存文件
 //post1用beego框架的方式保存文件
 func (h *HomeController) Post() {
@@ -106,12 +103,34 @@ func (h *HomeController) Post() {
 	}
 
 	//将用户上传的文件的md5和sha256值保存到区块链上，即数据上链
-	blockchain.CHAIN.SaveData([]byte(md5String))
-
-	blocks,_:=blockchain.CHAIN.QueryAllBlocks()
-	for _, block := range blocks{
-		fmt.Printf("区块高度:%d,区块内数据:%s\n",block.Height,string(block.Data))
+	user := &models.User{
+		Phone: phone,
 	}
+	user,_ = user.QueryUserByphone()
+	certRecord := models.CertRecord{
+		CertId:   []byte(md5String),
+		CertHash: []byte(fileHash),
+		CertName: user.Name,
+		Phone:    user.Phone,
+		CertCard: user.Card,
+		FileName: header.Filename,
+		FileSize: header.Size/1024,
+		CertTime: time.Now().Unix(),
+	}
+	//序列化
+	certBytes,_:=certRecord.Serialize()
+	block,err := blockchain.CHAIN.SaveData(certBytes)
+	if err!= nil {
+		fmt.Println(err.Error())
+		h.Ctx.WriteString("数据上链失败")
+		return
+	}
+	fmt.Println("恭喜,已经将数据保存到区块链上,区块高度是",block.Height)
+
+	//blocks,_:=blockchain.CHAIN.QueryAllBlocks()
+	//for _, block := range blocks{
+	//	fmt.Printf("区块高度:%d,区块内数据:%s\n",block.Height,string(block.Data))
+	//}
 
 
 	//上传文件保存到数据库中

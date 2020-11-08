@@ -1,6 +1,7 @@
 package blockchain
 
 import (
+	"Datarenzheng1010/models"
 	"errors"
 	"github.com/bolt-master"
 	"math/big"
@@ -174,4 +175,48 @@ func (bc BlockChain) QueryAllBlocks()([]*Block,error){
 	})
 
 	return blocks,err
+}
+
+//该方法用于根据用户输入的认证号查询到对应的区块信息
+func (bc BlockChain) QueryBlockByCertId(cert_id string)*Block{
+	db := bc.BoltDb
+	var err error
+	var block *Block
+	db.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte(BUCKET_NAME))
+		if bucket == nil {
+			err = errors.New("查询链上数据失败")
+			return err
+		}
+		eachHash := bc.LastHash
+		var eachBlock *Block
+		eachBig := new(big.Int)
+		zeroBig := big.NewInt(0)//默认值0的大整数
+		for {//无限循环查询cardid的值
+			//最后一个区块的byte类型
+			eachBlockBytes := bucket.Get(eachHash)
+			//反序列化操作
+			eachBlock, err = DeSerialize(eachBlockBytes)
+			if err != nil {
+				break
+			}
+			//将遍历到的区块中的数据跟用户提供的认证号进行比较
+			record,err:=models.DeSerializeCertRecord(eachBlock.Data)
+			if err != nil {
+				err = errors.New("查询链上数据失败")
+				return err
+			}
+			if string(record.CertId) == cert_id {//说明找到区块了
+				block = eachBlock
+				break
+			}
+			eachBig.SetBytes(eachBlock.PrevHash)
+			if eachBig.Cmp(zeroBig) == 0{//找到了创世区块
+				break
+			}
+			eachHash = eachBlock.PrevHash
+		}
+		return nil
+	})
+	return block
 }

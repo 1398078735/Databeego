@@ -3,7 +3,7 @@
 <html lang="zh_cn">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>保全网-区块链存证_在线取证_网络维权服务平台</title>
+    <title>电子数据认证平台_查看证书详情页面</title>
     <link rel="shortcut icon" href="https://www.baoquan.com/bundle/logo.ico">
     <script charset="utf-8" src="./js/b.js"></script>
     <script src="./js/hm.js"></script>
@@ -116,12 +116,12 @@
                                             <div class="hash-mob"
                                                  style="display: flex; align-items: center; flex-wrap: wrap;">
                                         <p style="color: rgb(19, 142, 254); overflow-wrap: break-word; word-break: normal; max-width: 100%; display: inline-block;">
-                                            88ef167864c4c92338e8eb05bd3cc4f750f14189b68c1a58050f32a5b1f4b34f</p><span><div
+                                            {{.CertRecord.CertHashHex}}</p><span><div
                                                     class="el-popover" style="width: 320px; display: none;"><div
                                                         class="el-popover__title">存证文件HASH</div><div><p
-                                                            style="color: rgb(51, 51, 51);">存证文件HASH是通过SHA256算法计算后得出的文件HASH值，与原始存证文件唯一对应。该HASH值将被实时写入保全链，确保文件的不可篡改</p></div><div
+                                                            style="color: rgb(51, 51, 51);">存证文件HASH是通过SHA256算法计算后得出的文件HASH值，与原始存证文件唯一对应。该HASH值将被实时写入认证链，确保文件的不可篡改</p></div><div
                                                         class="popper__arrow"></div></div><span
-                                                    class="help-icon">?</span></span></div>
+                                                    class="help-icon"></span></span></div>
                                    </div>
                                 <div class="chain">
                                     <p class="block-chain-hash"><span>国密SM3的HASH</span>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="block-chain-item"><span class="chain-name">VERAXCHAIN</span>
                             <div class="info"><p class="description">
-                                    保全链是保全网基于Fabric架构定制开发，联合司法鉴定机构、公证处、知识产权局、司法厅等权威机构共同搭建的可信司法联盟链。</p>
+                                    认证链是认证网基于Fabric架构定制开发，联合司法鉴定机构、公证处、知识产权局、司法厅等权威机构共同搭建的可信司法联盟链。</p>
                                 <p><span class="hash"><!-- react-text: 129 -->区块链哈希值<!-- /react-text -->
                                         <!-- react-text: 130 -->：<!-- /react-text --></span><a
                                             href="https://explorer.baoquan.com/browser/searchbyhash/e6479e1402473277550d588b6ffb88a1a6bd2f492981d899d12c03b0668fc268"
@@ -140,19 +140,19 @@
                                                 class="el-popover" style="width: 320px; display: none;"><div
                                                     class="el-popover__title">区块链哈希值</div><div>
                                 <p style="color: rgb(51, 51, 51);">
-                                    区块链哈希值是包含本次存证HASH上链信息的的区块交易hash值，通过此hash可以在保全链浏览器查询到文件hash上链信息。</p></div>
+                                    区块链哈希值是包含本次存证HASH上链信息的的区块交易hash值，通过此hash可以在认证链浏览器查询到文件hash上链信息。</p></div>
                             <div class="popper__arrow"></div>
                         </div>
                         <span class="help-icon">?</span></span></p><!-- react-text: 140 --><!-- /react-text --></div>
                     <i class="iconfont font-dui" style="position: absolute; right: 20px;"></i></div>
                 <!-- react-text: 142 --><!-- /react-text --><p class="chain-description">
-                    保全链是保全网联合司法鉴定中心、公证处、知识产权局、司法厅等权威机构搭建的可信司法链。</p></div>
+                    认证链是认证网联合司法鉴定中心、公证处、知识产权局、司法厅等权威机构搭建的可信司法链。</p></div>
             <div class="block-chain evidence-chain">
                 <p class="evidence-chain-code"><!-- react-text: 110 -->证据提取码：
                     <!-- /react-text --><span>987477</span><span class="evidence-chain-des" style="margin-left: 10px;">(提取码仅为本人可见，非本人登陆查看证书不显示)</span><span><div
                                 class="el-popover" style="width: 320px; display: none;"><div class="el-popover__title">证据提取码如何使用？</div><div>
                 <p style="color: rgb(51, 51, 51); font-weight: normal;">
-                    您可以复制证据提取码与本页面网址链接一同分享给第三方，以供对方下载查看证据文件；若您不提供提取码，对方仅能通过链接查阅保全证书，无权下载证据包</p></div>
+                    您可以复制证据提取码与本页面网址链接一同分享给第三方，以供对方下载查看证据文件；若您不提供提取码，对方仅能通过链接查阅认证证书，无权下载证据包</p></div>
             <div class="popper__arrow"></div>
         </div>
         <span class="help-icon">?</span></div>
@@ -167,39 +167,39 @@
 <div class="attestation-result">
     <div>
         <div style="word-break:break-all;word-wrap:break-word;" class="page cert-cover theme-3">
-            <h2 class="cert-cover-title">电子数据保全书</h2>
-            <h3 class="cert-cover-bq-number">保全号：<span ref="common.attestation_no" class="xfield">{{.FileCert}}</span>
+            <h2 class="cert-cover-title">电子数据认证书</h2>
+            <h3 class="cert-cover-bq-number">认证号：<span ref="common.attestation_no" class="xfield">{{.CertRecord.CertIdHex}}</span>
             </h3>
             <div class="cert-cover-content">
                 <table>
                     <tbody>
                     <tr>
-                        <td>保全人：</td>
-                        <td><span ref="att.name" class="xfield">周林华</span>&nbsp;</td>
+                        <td>认证人：</td>
+                        <td><span ref="att.name" class="xfield">{{.CertRecord.CertName}}</span>&nbsp;</td>
                     </tr>
                     <tr>
                         <td>联系方式：</td>
-                        <td><span ref="user.phone_number" class="xfield">176****2717</span>&nbsp;</td>
+                        <td><span ref="user.phone_number" class="xfield">{{.CertRecord.Phone}}</span>&nbsp;</td>
                     </tr>
                     <tr>
                         <td>身份证：</td>
-                        <td><span ref="att.idCard" class="xfield">362502************</span>&nbsp;</td>
+                        <td><span ref="att.idCard" class="xfield">{{.CertRecord.CertCard}}</span>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>保全平台：</td>
-                        <td>保全网</td>
+                        <td>认证平台：</td>
+                        <td>认证网</td>
                     </tr>
                     <tr>
                         <td>文件名称：</td>
-                        <td><span ref="att.fileName" class="xfield">{{.FileName}}</span>&nbsp;</td>
+                        <td><span ref="att.fileName" class="xfield">{{.CertRecord.FileName}}</span>&nbsp;</td>
                     </tr>
                     <tr>
                         <td>文件大小：</td>
-                        <td><span ref="att.fileSize" class="xfield">{{.FileSize}}KB</span>&nbsp;字节</td>
+                        <td><span ref="att.fileSize" class="xfield">{{.CertRecord.FileSize}}</span>&nbsp;字节</td>
                     </tr>
                     <tr>
-                        <td>保全时间：</td>
-                        <td><span ref="common.attestation_at" class="xfield">{{.CertTime}}</span>&nbsp;</td>
+                        <td>认证时间：</td>
+                        <td><span ref="common.attestation_at" class="xfield">{{.CertRecord.CertTimeFormat}}</span>&nbsp;</td>
                     </tr>
                     </tbody>
                 </table>
@@ -207,10 +207,10 @@
             <div class="cert-cover-footer">
                 <h5 class="cert-cover-h5">证书说明：</h5>
                 <ol>
-                    <li>本证书数据保全时间采用中国国家科学院授权中心标准时间进行保全。</li>
+                    <li>本证书数据认证时间采用中国国家科学院授权中心标准时间进行认证。</li>
                     <li>本证书可作为电子数据备案凭证。</li>
-                    <li>如需验证电子数据的一致性和保全时间，可通过保全网（https://www.baoquan.com）进行查询或申办公证。</li>
-                    <li>保全网是中国区块链研究中心等多家区块链研究协会发起单位，是国内首个使用区块链技术实现电子数据保全的企业。</li>
+                    <li>如需验证电子数据的一致性和认证时间，可通过认证网（https://www.baoquan.com）进行查询或申办公证。</li>
+                    <li>认证网是中国区块链研究中心等多家区块链研究协会发起单位，是国内首个使用区块链技术实现电子数据认证的企业。</li>
                 </ol>
             </div>
             <div class="cert-seal">

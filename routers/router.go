@@ -18,6 +18,15 @@ func init() {
     beego.Router("/home.html",&controllers.HomeController{})
 
     beego.Router("/uploadRecord.html",&controllers.HomeController{})
+	//查询认证号
+	beego.Router("/querydata.html",&controllers.CerDetail{})
+    //实名认证
+    beego.Router("/user_kyc",&controllers.UserKycController{})
+    //短信登录
+    beego.Router("/login_sms.html",&controllers.LoginSmsController{})
 
-	beego.Router("/querydata.html",&controllers.HomeController{})
+    //发送验证码登录接口
+	beego.Router("/send_sms",&controllers.SendSmsController{})
+    //手机号验证码登录功能接口
+    beego.Router("/login_sms",&controllers.LoginSmsController{})
 }
